@@ -1,0 +1,44 @@
+---
+- name: Import Signing Key | NewRelic
+  apt_key:
+    state: present
+    url: https://download.newrelic.com/548C16BF.gpg
+  tags:
+    - improves-security
+    - assumes-trust
+    - using-apt
+    - newrelic
+
+- name: Import Repository | NewRelic
+  apt_repository:
+    state: present
+    repo: 'deb http://apt.newrelic.com/debian/ newrelic non-free'
+  notify: Update Package Cache  
+  tags:
+    - software-source
+    - assumes-trust
+    - using-apt
+    - newrelic
+
+- name: Trigger All Callbacks
+  meta: flush_handlers
+
+- name: Install Packages | apt
+  apt:
+    state: latest
+    pkg: "{{ item }}"
+  with_items:
+    - monit
+  tags:
+    - software-installation
+    - using-apt
+
+- name: Service Started | NewRelic
+  service:
+    state: started
+    name: newrelic-sysmond
+    enabled: yes
+  tags:
+    - validation
+    - using-service
+    - newrelic

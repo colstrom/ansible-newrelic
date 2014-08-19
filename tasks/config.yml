@@ -1,0 +1,14 @@
+---
+- name: Configure NewRelic License Key
+  lineinfile:
+    state: present
+    dest: /etc/newrelic/nrsysmond.cfg
+    regexp: '^#* *license_key'
+    line: 'license_key=***REMOVED***'
+  tags:
+    - configuration
+    - precise-configuration
+    - external-service
+    - newrelic
+
+#  command: nrsysmond-config --set license_key=***REMOVED***

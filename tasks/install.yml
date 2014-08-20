@@ -28,7 +28,18 @@
     state: latest
     pkg: "{{ item }}"
   with_items:
-    - monit
+    - newrelic-sysmond
+  tags:
+    - software-installation
+    - using-apt
+
+- name: Install Packages | apt
+  apt:
+    state: latest
+    pkg: "{{ item }}"
+  with_items:
+    - newrelic-php5
+  when: newrelic_php_apm_enabled
   tags:
     - software-installation
     - using-apt

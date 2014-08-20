@@ -12,3 +12,12 @@
     - newrelic
 
 #  command: nrsysmond-config --set license_key=***REMOVED***
+
+- name: Install NewRelic using NewRelic installer with license key
+  shell: newrelic-install install executable=/bin/bash
+  notify: Reload Service | php5-fpm
+  when: newrelic_php_apm_enabled
+  tags:
+    - monitoring
+    - using-newrelic
+    - php

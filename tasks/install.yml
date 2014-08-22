@@ -43,13 +43,3 @@
   tags:
     - software-installation
     - using-apt
-
-- name: Service Started | NewRelic
-  service:
-    state: started
-    name: newrelic-sysmond
-    enabled: yes
-  tags:
-    - validation
-    - using-service
-    - newrelic

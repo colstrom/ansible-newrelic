@@ -1,2 +1,5 @@
 ---
 newrelic_php_apm_enabled: no
+newrelic_proxy_required: no
+newrelic_proxy_address: "outbound.{{ project }}.{{ domain }}"
+newrelic_proxy_port: 3128

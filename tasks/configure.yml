@@ -1,5 +1,5 @@
 ---
-- name: Configure NewRelic License Key
+- name: Configure | license_key
   lineinfile:
     state: present
     dest: /etc/newrelic/nrsysmond.cfg
@@ -11,10 +11,23 @@
     - external-service
     - newrelic
 
-#  command: nrsysmond-config --set license_key=***REMOVED***
+- name: Configure | proxy
+  lineinfile:
+    state: present
+    dest: /etc/newrelic/nrsysmond.cfg
+    regexp: '^#* *proxy'
+    line: "proxy={{ newrelic_proxy_address }}:{{ newrelic_proxy_port }}"
+  when: newrelic_proxy_required
+  tags:
+    - configuration
+    - precise-configuration
+    - external-service
+    - newrelic
 
 - name: Install NewRelic using NewRelic installer with license key
-  shell: newrelic-install install executable=/bin/bash
+  shell: newrelic-install install
+  args:
+    executable: /bin/bash
   notify: Reload Service | php5-fpm
   when: newrelic_php_apm_enabled
   tags:

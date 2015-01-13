@@ -1,4 +1,12 @@
 ---
+- name: Remove Duplicate Config
+  file:
+    state: absent
+    path: /etc/php5/fpm/conf.d/newrelic.ini
+  tags:
+    - newrelic
+    - housekeeping
+
 - name: Configure sysmond | license_key
   lineinfile:
     state: present

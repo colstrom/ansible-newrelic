@@ -19,3 +19,14 @@
   tags:
     - software-installation
     - using-apt
+
+- name: Install PHP APM | newrelic-install
+  shell: newrelic-install install
+  args:
+    executable: /bin/bash
+  notify: Reload Service | php5-fpm
+  when: newrelic_php_apm_enabled
+  tags:
+    - monitoring
+    - using-newrelic
+    - php

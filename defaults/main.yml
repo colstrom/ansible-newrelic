@@ -3,4 +3,4 @@ newrelic_php_apm_enabled: no
 newrelic_proxy_required: no
 newrelic_proxy_address: "outbound.{{ project }}-{{ environment_tier }}.{{ domain }}"
 newrelic_proxy_port: 3128
-newrelic_appname: "PHP Application"
+newrelic_appname: "{{ project }} ({{ environment_tier }})"

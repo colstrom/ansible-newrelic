@@ -47,6 +47,21 @@
     - newrelic
     - php
 
+- name: Configure PHP APM | newrelic.appname
+  lineinfile:
+    state: present
+    dest: /etc/php5/fpm/conf.d/20-newrelic.ini
+    regexp: '^;* *newrelic\.appname'
+    line: 'newrelic.appname = "{{ newrelic_appname }}"'
+  notify: Reload Service | php5-fpm
+  when: newrelic_php_apm_enabled
+  tags:
+    - configuration
+    - precise-configuration
+    - external-service
+    - newrelic
+    - php
+
 - name: Configure PHP APM | newrelic.daemon.proxy
   lineinfile:
     state: present

@@ -13,16 +13,16 @@
   debconf:
     name: newrelic-php5
     question: newrelic-php5/application-name
-    value: "{{ newrelic_appname }}"
     vtype: string
+    value: "{{ newrelic_appname }}"
   when: newrelic_php_apm_enabled
 
 - name: Preemptively Answer | PHP APM | newrelic.license
   debconf:
     name: newrelic-php5
     question: newrelic-php5/license-key
-    value: "{{ newrelic_license }}"
     vtype: string
+    value: "{{ newrelic_license }}"
   when: newrelic_php_apm_enabled
 
 - name: Install Packages | apt

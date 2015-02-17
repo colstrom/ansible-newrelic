@@ -9,6 +9,22 @@
     - software-installation
     - using-apt
 
+- name: Preemptively Answer | PHP APM | newrelic.appname
+  debconf:
+    name: newrelic-php5
+    question: newrelic-php5/application-name
+    value: "{{ newrelic_appname }}"
+    vtype: string
+  when: newrelic_php_apm_enabled
+
+- name: Preemptively Answer | PHP APM | newrelic.license
+  debconf:
+    name: newrelic-php5
+    question: newrelic-php5/license-key
+    value: "{{ newrelic_license }}"
+    vtype: string
+  when: newrelic_php_apm_enabled
+
 - name: Install Packages | apt
   apt:
     state: latest

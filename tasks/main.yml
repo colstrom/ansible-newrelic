@@ -1,4 +1,10 @@
 ---
 - include: install.yml
+  tags:
+    - newrelic
 - include: configure.yml
+  tags:
+    - newrelic
 - include: services.yml
+  tags:
+    - newrelic
